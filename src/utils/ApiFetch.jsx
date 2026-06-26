@@ -50,11 +50,13 @@ const fetchProd = async (alias, token) => {
 };
 
 export const fetchAPI = async (url) => {
-  const { alias, token } = parseUrl(url);
-  const payload = isDev()
-    ? await fetchDev(alias, token)
-    : await fetchProd(alias, token);
+  // Usamos el servicio allorigins para saltar el error de CORS
+  const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
 
-  // payload is { scoreboard: {...}, contest: {...} }
-  return payload;
+  const response = await fetch(proxyUrl);
+  if (!response.ok) throw new Error('Error al conectar con la API');
+
+  const data = await response.json();
+  // allorigins devuelve el contenido en data.contents como un string JSON
+  return JSON.parse(data.contents);
 };
