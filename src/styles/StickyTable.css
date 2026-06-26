@@ -1,0 +1,51 @@
+.success,
+.fail,
+.partial,
+.gold,
+.silver,
+.bronze,
+.diploma {
+
+    transition: color 0.3s ease;
+    /* Agregamos una transición suave para el color del texto */
+}
+
+.success {
+    background-color: #8BC34A;
+}
+
+.fail {
+    background-color: #FF5722;
+}
+
+.partial {
+    background-color: #d5af07;
+}
+
+.gold {
+    background-color: hsla(49, 90%, 46%, 0.909);
+}
+
+.silver {
+    background-color: #757b7bc6;
+}
+
+.bronze {
+    background-color: #925a05b7;
+}
+
+.diploma {
+    background-color: #0975d4d4;
+}
+
+/* Estilos para hover */
+.success:hover,
+.fail:hover,
+.partial:hover,
+.gold:hover,
+.silver:hover,
+.bronze:hover,
+.diploma:hover {
+    opacity: 0.8;
+    /* Reducimos un poco la opacidad */
+}
