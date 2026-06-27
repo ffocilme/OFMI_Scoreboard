@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://felipe-focil.github.io/OFMIScoreboard/",
+  "homepage": "https://ffocilme.github.io/OFMI_Scoreboard/",
   "scripts": {
   "dev": "vite",
     "build": "vite build",
