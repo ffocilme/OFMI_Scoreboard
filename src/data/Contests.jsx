@@ -12,7 +12,7 @@ export const Contests = {
     content: "Olimpiada Femenil Mexicana de Informática 2026",
     alternative : "OFMI 2026",
     links : [
-        "https://omegaup.com/arena/testscore26/scoreboard/3vWKmzE4dtb773xXd3kH3ZPbe58qCZ"
+        "https://omegaup.com/arena/ofmi-2026/scoreboard/pfRb2gBteeyDxGaR3caa3rZSH8wN3f"
     ],
     config : {
       gold : 1,
