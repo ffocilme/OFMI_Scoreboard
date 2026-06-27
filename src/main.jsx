@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,35 +13,40 @@ import FeaturedContests from "./components/FeaturedContests.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App.jsx";
 import basename from "./utils/basename.jsx";
+import NotFound from "./components/NotFound.jsx";
 
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
-    path: `${basename}/`,
+    path: "/",
     element: <App />,
   },
   {
-    path: `${basename}/scoreboards`,
+    path: "/scoreboards",
     element: <SplitContest />,
   },
   {
-    path: `${basename}/contest`,
+    path: "/contest",
     element: <Contest />,
   },
   {
-    path: `${basename}/contest/:id`,
+    path: "/contest/:id",
     element: <Contest />,
   },
   {
-    path: `${basename}/contest/admin/:id`,
+    path: "/contest/admin/:id",
     element: <Contest admin={true} />,
   },
   {
-    path: `${basename}/merge`,
+    path: "/merge",
     element: <StackComponent />,
   },
-]);
+  {
+    path: "*",
+    element: <NotFound error="404 - Página no encontrada" />,
+  },
+], { basename: basename || "/" });
 
 function WrappedApp() {
   const [darkMode, setDarkMode] = useState(true);

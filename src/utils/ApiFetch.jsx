@@ -2,11 +2,6 @@
 
 const ALLORIGINS = 'https://api.allorigins.win/get?url=';
 
-const isDev = () =>
-  typeof window !== 'undefined' &&
-  (window.location.hostname === 'localhost' ||
-    window.location.hostname === '127.0.0.1');
-
 /**
  * Extract alias/token from a full scoreboard URL.
  * Works with https://omegaup.com/arena/ALIAS/scoreboard/TOKEN
@@ -28,16 +23,7 @@ const extractPayload = (html) => {
   return JSON.parse(match[1]);
 };
 
-const fetchDev = async (alias, token) => {
-  // Goes through the Vite dev-server proxy → no CORS
-  const path = `/omegaup-proxy/arena/${alias}/scoreboard/${token}`;
-  const res = await fetch(path);
-  if (!res.ok) throw new Error(`HTTP ${res.status} (dev proxy)`);
-  const html = await res.text();
-  return extractPayload(html);
-};
-
-const fetchProd = async (alias, token) => {
+const fetchScoreboard = async (alias, token) => {
   // allorigins wraps the full scoreboard HTML page
   const target = `https://omegaup.com/arena/${alias}/scoreboard/${token}`;
   const res = await fetch(ALLORIGINS + encodeURIComponent(target));
@@ -50,13 +36,6 @@ const fetchProd = async (alias, token) => {
 };
 
 export const fetchAPI = async (url) => {
-  // Usamos el servicio allorigins para saltar el error de CORS
-  const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
-
-  const response = await fetch(proxyUrl);
-  if (!response.ok) throw new Error('Error al conectar con la API');
-
-  const data = await response.json();
-  // allorigins devuelve el contenido en data.contents como un string JSON
-  return JSON.parse(data.contents);
+  const { alias, token } = parseUrl(url);
+  return fetchScoreboard(alias, token);
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../assets/favicon.ico';
 import '../styles/LoadingSpinner.css';
 
-const NotFound = ({ error }) => {
+const NotFound = ({ error = "404 - Página no encontrada" }) => {
     return (
         <>
             <div className='loading-container'>
